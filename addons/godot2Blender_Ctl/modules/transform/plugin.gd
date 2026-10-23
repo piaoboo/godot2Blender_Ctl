@@ -273,7 +273,11 @@ func _forward_3d_gui_input(camera, event):
 							start_session(SESSION.ROTATE, camera, event)
 							forward = true
 						KEY_S:
-							if not event.ctrl_pressed:
+							# Alt is excluded on purpose. Reported 2026-10-24:
+							# Alt+S competes with opening the shader editor in
+							# Godot, and swallowing it here made that shortcut
+							# dead while a Node3D was selected in the 3D viewport.
+							if not event.ctrl_pressed and not event.alt_pressed:
 								# solve conflict with free look
 								if not _is_pressing_right_mouse_button:
 									start_session(SESSION.SCALE, camera, event)

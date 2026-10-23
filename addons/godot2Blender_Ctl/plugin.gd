@@ -30,6 +30,11 @@ var _selection: EditorPlugin
 
 
 func _enter_tree() -> void:
+	## The G/R/S modal transform needs every 3D viewport key event, not just the
+	## ones the editor would otherwise forward. Without this, `_forward_3d_gui_input`
+	## is never called for plain key presses and G/R/S silently do nothing.
+	set_input_event_forwarding_always_enabled()
+
 	## Transform first: it installs the overlay the viewport module draws into.
 	_transform = _spawn(TransformModule, "TransformModule")
 	_viewport = _spawn(ViewportModule, "ViewportModule")
