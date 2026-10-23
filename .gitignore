@@ -1,0 +1,10 @@
+# Godot
+.godot/
+*.translation
+
+# macOS
+.DS_Store
+
+# Build output
+build/
+export/
